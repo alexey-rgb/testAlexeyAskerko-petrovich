@@ -1,0 +1,44 @@
+@media (min-width: 320px) {
+  .stepper {
+    display: flex;
+    width: 65px;
+    min-height: 40px;
+  }
+
+  .stepper__arrow-wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .stepper__up {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background: no-repeat 100% 0px url(../../img/count--i.png);
+  }
+
+  .stepper__down {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background: no-repeat url(../../img/count--i.png);
+    background-position: right -18px;
+  }
+
+  .stepper__input {
+    width: 40px;
+    text-align: center;
+    border: 1px solid #ccc;
+  }
+
+  .stepper__arrow {
+    width: 25px;
+    height: 20px;
+    border: 1px solid #ccc;
+    border-left: none;
+    cursor: pointer;
+  }
+  .stepper__arrow:nth-of-type(2) {
+    border-top: none;
+  }
+}

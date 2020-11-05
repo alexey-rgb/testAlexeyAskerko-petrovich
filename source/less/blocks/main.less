@@ -1,0 +1,24 @@
+@media (min-width: 320px) {
+  .main {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .main__card {
+    display: none;
+    flex-direction: column;
+    width: 240px;
+    min-height: 545px;
+    padding: 10px;
+    border: 1px solid #e0e0e0;
+    margin: 10px auto;
+  }
+}
+
+@media (min-width: 768px) {
+  .main__card {
+    width: 600px;
+    min-height: 250px;
+    flex-direction: row;
+  }
+}
