@@ -5,6 +5,7 @@
   "private": true,
   "description": "test task",
   "devDependencies": {
+    "@babel/preset-env": "^7.12.1",
     "autoprefixer": "^9.5.1",
     "browser-sync": "^2.26.7",
     "del": "^5.1.0",
@@ -23,6 +24,18 @@
     "rename": "^1.0.4",
     "stylelint": "^10.1.0"
   },
+  "presets": [
+    [
+      "@babel/presets-env",
+      {
+        "targets": {
+          "browsers": {
+            "ie": "11"
+          }
+        }
+      }
+    ]
+  ],
   "scripts": {
     "editorconfig": "editorconfig-cli",
     "stylelint": "stylelint \"source/less/**/*.less\" --syntax less",
@@ -47,5 +60,8 @@
   ],
   "engines": {
     "node": "14.15.0"
+  },
+  "dependencies": {
+    "classlist.js": "^1.1.20150312"
   }
 }

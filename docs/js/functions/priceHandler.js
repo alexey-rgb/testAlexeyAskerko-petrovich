@@ -3,8 +3,9 @@ import { productPrices } from "./price.js";
 ("use strict");
 
 const priceHandler = (evt) => {
+  evt.preventDefault();
   const controllerId = evt.target.getAttribute("id"),
-    controllerClass = evt.target.getAttribute("class");
+    controllerClass = evt.target.getAttribute("class").split(" ")[0];
 
   productPrices.forEach((product) => {
     const productId = product[controllerClass]["productId"],

@@ -81,6 +81,12 @@
     line-height: 17px;
   }
 
+  .product-info__measure {
+    text-align: center;
+    color: #ffffff;
+    background: #000000;
+  }
+
   .product-info__gold-price {
     font-size: 28px;
     font-weight: 700;
@@ -194,5 +200,63 @@
     display: block;
     font-size: 13px;
     line-height: 15px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .product-info:nth-of-type(1) {
+    display: grid;
+    grid-template-columns: auto auto auto;
+  }
+
+  .product-info__accessories {
+    height: max-content;
+    grid-column-start: 2;
+    grid-row-start: 2;
+    margin: -111px 10px;
+    width: unset;
+  }
+
+  .product-info__name {
+    height: max-content;
+    grid-column-start: 2;
+    grid-row-start: 1;
+    margin: 33px 0 0 10px;
+  }
+
+  .product-info__code-and-status {
+    height: max-content;
+    margin-left: 10px;
+    grid-column-start: 2;
+    grid-row-start: 1;
+  }
+
+  .product-info__gold-price {
+    font-size: 25px;
+  }
+
+  .product-info__retail-price {
+    font-size: 25px;
+  }
+
+  .product-info__metre-price {
+    margin: 0;
+  }
+
+  .product-info__package-price {
+    margin: 0;
+  }
+
+  .product-info__sort {
+    margin: 0;
+    width: 238px;
+  }
+
+  .product-info__price-club-card {
+    text-align: end;
+  }
+
+  .product-info__price-default {
+    text-align: end;
   }
 }
