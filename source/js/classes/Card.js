@@ -10,6 +10,7 @@ export default class Card {
       productButton,
       goldPrice,
       retailPrice,
+      accessoriesText,
     ] = templateClasses;
     this.productName = productName;
     this.productImage = productImage;
@@ -22,6 +23,7 @@ export default class Card {
     this.productButton = productButton;
     this.goldPrice = goldPrice;
     this.retailPrice = retailPrice;
+    this.accessoriesText = accessoriesText;
   }
 }
 
@@ -37,10 +39,24 @@ Card.prototype.getNode = (wrapper, className) => {
 
 Card.prototype.getCard = function () {
   const clone = this.template.cloneNode(true),
-    cloneText = clone.querySelector(this.productCode).textContent.slice(0, 5);
+    accessorie = this.productInfo.assocProducts
+      .replace(/[.,\/#!$%\^&\*:{}=\-_`~()]/g, "")
+      .replace(/\s{2,}/g, " "),
+    finalAccesorie = accessorie.split(";").filter((expr) => expr !== ""),
+    deficitLinkCount =
+      finalAccesorie.length - this.getNode(clone, ".accessories__link").length;
+
+  if (deficitLinkCount > 0) {
+    for (let i = 0; i < deficitLinkCount; i++) {
+      const newLink = document.createElement("a");
+      newLink.setAttribute("class", "accessories__link");
+      this.getNode(clone, this.accessoriesText).after(newLink);
+    }
+  }
+
   clone.style.display = "flex";
 
-  // Insert sever data into new card
+  // Insert 'server' mock-data into new card
 
   this.getNode(clone, this.productName).textContent = this.productInfo.title;
 
@@ -48,19 +64,23 @@ Card.prototype.getCard = function () {
     this.productInfo.primaryImageUrl.replace(/.jpg|.png/gi, "_220x220_1") +
     ".jpg";
   this.getNode(clone, this.productCode).textContent = `${
-    cloneText + this.productInfo.code
+    "Код: " + this.productInfo.code
   }`;
+
+  // Insert prepared string into accesorie-link
+
   this.getNode(clone, this.productAccessories).forEach((link, i) => {
-    let accessorie = this.productInfo.assocProducts.split(";\n")[i];
-    console.log(
-      accessorie.includes("undefined"),
-      accessorie.includes(undefined),
-      accessorie === undefined
-    );
-    /*   link.textContent = accessorie.includes("undefined")
-      ? accessorie.replace(/./, "") + ","
-      : false; */
+    if (finalAccesorie[i] !== undefined) {
+      if (finalAccesorie.length - 1 === i)
+        link.textContent = finalAccesorie[i] + ".";
+      else {
+        link.textContent = finalAccesorie[i] + ",";
+      }
+    }
   });
+
+  // Get id to the button
+
   this.getNode(
     clone,
     this.productButton

@@ -14,6 +14,7 @@ const container = document.querySelector(".main"),
     ".product-info__button",
     ".product-info__gold-price",
     ".product-info__retail-price",
+    ".accessories__text",
   ],
   renderCards = (res) => {
     res.forEach((product) => {
