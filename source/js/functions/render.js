@@ -3,7 +3,6 @@ import Card from "../classes/Card.js";
 ("use strict");
 
 const container = document.querySelector(".main"),
-  templateContent = document.querySelector(".main__card"),
   classes = [
     ".product-info__name",
     ".product-info__image",
@@ -20,6 +19,10 @@ const container = document.querySelector(".main"),
   ],
   renderCards = (res) => {
     res.forEach((product) => {
+      const templateContent = document
+        .getElementById("card")
+        .content.querySelector(".main__card")
+        .cloneNode(true);
       const newCard = new Card(classes, templateContent, product);
       container.appendChild(newCard.getCard());
     });

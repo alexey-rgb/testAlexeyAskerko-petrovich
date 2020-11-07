@@ -54,7 +54,7 @@ Card.prototype.getNodes = (wrapper, classesNames) => {
 // Create a new card & insert 'server' mock-data into new nodes
 
 Card.prototype.getCard = function () {
-  const clone = this.template.cloneNode(true),
+  const clone = this.template,
     accessorie = this.productInfo.assocProducts
       .replace(/[.,\/#!$%\^&\*:{}=\-_`~()]/g, "")
       .replace(/\s{2,}/g, " "),
@@ -84,6 +84,8 @@ Card.prototype.getCard = function () {
       accessoriesText.after(newLink);
     }
   }
+
+  console.log(clone);
 
   clone.style.display = "flex";
   clone.setAttribute("id", `card-${this.productInfo.productId}`);
