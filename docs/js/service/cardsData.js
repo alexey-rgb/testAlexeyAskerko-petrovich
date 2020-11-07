@@ -1,6 +1,6 @@
-import { getPrices } from '../functions/price.js'
+import { getPrices } from "../functions/pricePattern.js";
 
-"use strict";
+("use strict");
 
 const getData = (renderProducts) => {
   fetch("../../data/products.json")
@@ -9,7 +9,7 @@ const getData = (renderProducts) => {
     })
     .then((res) => {
       renderProducts(res);
-      getPrices(res)
+      getPrices(res);
     })
     .catch((e) => console.log(e));
 };

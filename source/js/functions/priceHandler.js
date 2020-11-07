@@ -1,4 +1,4 @@
-import { productPrices } from "./price.js";
+import { productPrices } from "./pricePattern.js";
 
 ("use strict");
 

@@ -1,5 +1,8 @@
-export default class Card {
+import getNodes from "../functions/cardsSettings.js";
+
+export default class Card extends getNodes {
   constructor(templateClasses, template, productInfo) {
+    super();
     const [
       productName,
       productImage,
@@ -14,6 +17,7 @@ export default class Card {
       calculatePoints,
       calculateMeasure,
     ] = templateClasses;
+
     this.productName = productName;
     this.productImage = productImage;
     this.productCode = productCode;
@@ -31,31 +35,12 @@ export default class Card {
   }
 }
 
-// get node to continue settings
-
-Card.prototype.getNode = (wrapper, className) => {
-  if (className === ".accessories__link")
-    return wrapper.querySelectorAll(className);
-  return wrapper.querySelector(className);
-};
-
-Card.prototype.getNodes = (wrapper, classesNames) => {
-  const settableNodes = [];
-  classesNames.forEach((className) => {
-    if (className === ".accessories__link")
-      settableNodes.push(wrapper.querySelectorAll(className));
-    else {
-      settableNodes.push(wrapper.querySelector(className));
-    }
-  });
-  return settableNodes;
-};
-
 // Create a new card & insert 'server' mock-data into new nodes
 
 Card.prototype.getCard = function () {
   const clone = this.template,
-    accessorie = this.productInfo.assocProducts
+    productInfo = this.productInfo,
+    accessorie = productInfo.assocProducts
       .replace(/[.,\/#!$%\^&\*:{}=\-_`~()]/g, "")
       .replace(/\s{2,}/g, " "),
     finalAccesorie = accessorie.split(";").filter((expr) => expr !== ""),
@@ -85,13 +70,11 @@ Card.prototype.getCard = function () {
     }
   }
 
-  console.log(clone);
-
   clone.style.display = "flex";
-  clone.setAttribute("id", `card-${this.productInfo.productId}`);
+  clone.setAttribute("id", `card-${productInfo.productId}`);
 
-  metreControl.setAttribute("id", this.productInfo.productId);
-  packageControl.setAttribute("id", this.productInfo.productId);
+  metreControl.setAttribute("id", productInfo.productId);
+  packageControl.setAttribute("id", productInfo.productId);
 
   // toogle black-background between of measure controls
 
@@ -110,12 +93,11 @@ Card.prototype.getCard = function () {
     }
   };
 
-  name.textContent = this.productInfo.title;
+  name.textContent = productInfo.title;
 
   img.src =
-    this.productInfo.primaryImageUrl.replace(/.jpg|.png/gi, "_220x220_1") +
-    ".jpg";
-  code.textContent = `${"Код: " + this.productInfo.code}`;
+    productInfo.primaryImageUrl.replace(/.jpg|.png/gi, "_220x220_1") + ".jpg";
+  code.textContent = `${"Код: " + productInfo.code}`;
 
   // Insert prepared string into accesorie-link
 
@@ -131,16 +113,16 @@ Card.prototype.getCard = function () {
 
   // set button id
 
-  button.dataset.productId = `card-${this.productInfo.productId}`;
+  button.dataset.productId = `card-${productInfo.productId}`;
 
-  goldPrice.textContent = +this.productInfo.priceGoldAlt.toFixed(2);
-  retailPrice.textContent = +this.productInfo.priceRetailAlt.toFixed(2);
+  goldPrice.textContent = +productInfo.priceGoldAlt.toFixed(2);
+  retailPrice.textContent = +productInfo.priceRetailAlt.toFixed(2);
 
   metreControl.classList.add("product-info__measure");
 
-  calculatePoints.textContent = `Можно купить за ${this.productInfo.bonusAmount} балла`;
+  calculatePoints.textContent = `Можно купить за ${productInfo.bonusAmount} балла`;
 
-  calculateMeasure.textContent = `1 ${this.productInfo.unit} = ${this.productInfo.unitRatioAlt} ${this.productInfo.unitAlt}`;
+  calculateMeasure.textContent = `1 ${productInfo.unit} = ${productInfo.unitRatioAlt} ${productInfo.unitAlt}`;
 
   return clone;
 };
